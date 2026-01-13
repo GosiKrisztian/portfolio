@@ -4,19 +4,22 @@
   background: rgba(2, 3, 5, 0.98);
   backdrop-filter: blur(10px);
   padding: 16px 40px;
+  /* Ez rögzíti felül */
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   border-bottom: 1px solid rgba(100, 200, 255, 0.1);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Erősebb árnyék, hogy elváljon a tartalomtól */
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1000;
+  z-index: 9999; /* Nagyon magas érték, hogy semmi ne takarja el */
 }
 
 .logo {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 800;
   color: #64c8ff;
   letter-spacing: 1px;
   white-space: nowrap;
@@ -30,18 +33,19 @@
 }
 
 .navLink {
-  font-size: 14px;
-  color: rgba(100, 200, 255, 0.6);
-  padding: 8px 14px;
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(100, 200, 255, 0.8);
+  padding: 10px 16px;
   border-radius: 6px;
   transition: all 0.3s ease;
   text-decoration: none;
-  font-weight: 500;
 }
 
 .navLink:hover {
-  color: #64c8ff;
-  background: rgba(100, 200, 255, 0.1);
+  color: #ffffff;
+  background: rgba(100, 200, 255, 0.2);
+  transform: translate(-2px);
 }
 
 /* Responsive Design */
@@ -59,7 +63,7 @@
   }
 
   .navLink {
-    font-size: 13px;
+    font-size: 16px;
     padding: 6px 12px;
   }
 }
@@ -83,7 +87,7 @@
   }
 
   .navLink {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 15px;
+    padding: 8px 12px;
   }
 }

@@ -26,7 +26,6 @@
     linear-gradient(135deg, var(--background-dark) 0%, var(--background-darker) 50%, var(--background-darkest) 100%);
   background-attachment: fixed;
   position: relative;
-  overflow-x: hidden;
 }
 
 /* Space background stars effect */

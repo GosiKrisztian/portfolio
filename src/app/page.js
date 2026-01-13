@@ -8,6 +8,7 @@ import introStyles from "./styles/intro.module.css";
 import worksStyles from "./styles/works.module.css";
 import partnersStyles from "./styles/partners.module.css";
 import contactStyles from "./styles/contact.module.css";
+import formStyles from "./styles/form.module.css";
 import faqStyles from "./styles/faq.module.css";
 import footerStyles from "./styles/footer.module.css";
 
@@ -43,15 +44,15 @@ export default function Home() {
   const validateForm = () => {
     const errors = {};
     if (!formData.name.trim()) {
-      errors.name = "Name is required";
+      errors.name = "Kötelező kitölteni";
     }
     if (!formData.email.trim()) {
-      errors.email = "Email is required";
+      errors.email = "Kötelező kitölteni";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Please enter a valid email";
+      errors.email = "Kérem adjon meg egy érvényes e-mail címet";
     }
     if (!formData.message.trim()) {
-      errors.message = "Message is required";
+      errors.message = "Kötelező kitölteni";
     }
     return errors;
   };
@@ -94,7 +95,7 @@ export default function Home() {
   ];
 
   return (
-    <div className={containerStyles.container}>
+    <div className={containerStyles.container}> 
       {/* Header Navigation */}
       <header className={headerStyles.header}>
         <div className={headerStyles.logo}>PixelPitchPartners</div>
@@ -114,6 +115,7 @@ export default function Home() {
         </nav>
       </header>
 
+
       {/* Main Content */}
       <main className={mainStyles.main}>
         {/* Introduction Section */}
@@ -125,55 +127,60 @@ export default function Home() {
             </p>
           </div>
           
-          <form className={introStyles.contactForm} onSubmit={handleSubmit}>
-            <div className={introStyles.formGroup}>
-              <label htmlFor="name" className={introStyles.formLabel}>Name *</label>
+          {/* Message Section */}
+          <form className={formStyles.contactForm} onSubmit={handleSubmit}>
+            <h1 className={formStyles.formTitle}>Küldjön nekünk üzenetet!</h1>
+            <div className={formStyles.formGroup}>
+              <label htmlFor="name" className={formStyles.formLabel}>Név *</label>
               <input
                 type="text"
                 id="name"
                 name="name"
+                maxLength="50"
                 value={formData.name}
                 onChange={handleInputChange}
-                className={introStyles.formInput}
-                placeholder="Your name"
+                className={formStyles.formInput}
+                placeholder="Név"
               />
-              {formErrors.name && <span className={introStyles.errorMessage}>{formErrors.name}</span>}
+              {formErrors.name && <span className={formStyles.errorMessage}>{formErrors.name}</span>}
             </div>
 
-            <div className={introStyles.formGroup}>
-              <label htmlFor="email" className={introStyles.formLabel}>Email *</label>
+            <div className={formStyles.formGroup}>
+              <label htmlFor="email" className={formStyles.formLabel}>Email cím *</label>
               <input
                 type="email"
                 id="email"
                 name="email"
+                maxLength="50"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={introStyles.formInput}
-                placeholder="your@email.com"
+                className={formStyles.formInput}
+                placeholder="minta@email.com"
               />
-              {formErrors.email && <span className={introStyles.errorMessage}>{formErrors.email}</span>}
+              {formErrors.email && <span className={formStyles.errorMessage}>{formErrors.email}</span>}
             </div>
 
-            <div className={introStyles.formGroup}>
-              <label htmlFor="message" className={introStyles.formLabel}>Message *</label>
+            <div className={formStyles.formGroup}>
+              <label htmlFor="message" className={formStyles.formLabel}>Üzenet *</label>
               <textarea
                 id="message"
                 name="message"
+                maxLength="500"
                 value={formData.message}
                 onChange={handleInputChange}
-                className={introStyles.formTextarea}
-                placeholder="Your message..."
+                className={formStyles.formTextarea}
+                placeholder="Az Ön üzenete . . ."
               />
-              {formErrors.message && <span className={introStyles.errorMessage}>{formErrors.message}</span>}
+              {formErrors.message && <span className={formStyles.errorMessage}>{formErrors.message}</span>}
             </div>
 
-            <button type="submit" className={introStyles.submitBtn}>
-              Send Message
+            <button type="submit" className={formStyles.submitBtn}>
+              Küldés
             </button>
 
             {submitStatus === "success" && (
               <div style={{ color: "#4ade80", fontSize: "14px", textAlign: "center", marginTop: "10px" }}>
-                ✓ Message sent successfully!
+                ✓ Üzenet sikeresen elküldve!
               </div>
             )}
           </form>
