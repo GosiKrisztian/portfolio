@@ -1,11 +1,11 @@
 /* Works Section */
 .worksSection {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .sectionTitle {
-  font-size: 36px;
-  margin-bottom: 40px;
+  font-size: 30px;
+  margin-bottom: 25px;
   font-weight: 700;
   text-shadow: 0 0 20px rgba(100, 200, 255, 0.6);
   color: #64c8ff;
@@ -13,77 +13,82 @@
 
 .galleryContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .imageCard {
-  background: rgba(30, 35, 65, 0.4);
+  background: rgba(20, 25, 50, 0.5);
   backdrop-filter: blur(10px);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(100, 200, 255, 0.2);
+  border: 1px solid rgba(100, 200, 255, 0.15);
 }
 
 .imageCard:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 35px rgba(100, 200, 255, 0.2);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(100, 200, 255, 0.15);
 }
 
 .imagePlaceholder {
   width: 100%;
-  height: 250px;
-  background: linear-gradient(135deg, rgba(100, 200, 255, 0.1), rgba(50, 100, 200, 0.1));
+  height: 200px;
+  background: linear-gradient(135deg, rgba(100, 200, 255, 0.08), rgba(50, 100, 200, 0.08));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  border-bottom: 1px solid rgba(100, 200, 255, 0.2);
-  color: rgba(100, 200, 255, 0.6);
+  font-size: 16px;
+  border-bottom: 1px solid rgba(100, 200, 255, 0.15);
+  color: rgba(100, 200, 255, 0.5);
 }
 
 .imageCard h3 {
-  font-size: 20px;
-  padding: 20px 20px 10px;
+  font-size: 17px;
+  padding: 16px 16px 8px;
   margin: 0;
   color: #64c8ff;
+  font-weight: 600;
 }
 
 .imageCard p {
-  font-size: 14px;
-  padding: 0 20px 20px;
-  color: #b0b0b0;
+  font-size: 13px;
+  padding: 0 16px 16px;
+  color: #d0d0d0;
   margin: 0;
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
   .sectionTitle {
-    font-size: 28px;
+    font-size: 24px;
+  }
+
+  .galleryContainer {
+    gap: 18px;
   }
 }
 
 @media (max-width: 640px) {
   .sectionTitle {
-    font-size: 22px;
-    margin-bottom: 25px;
+    font-size: 20px;
+    margin-bottom: 18px;
   }
 
   .galleryContainer {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 15px;
   }
 
   .imagePlaceholder {
-    height: 200px;
+    height: 160px;
   }
 
   .imageCard h3 {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .imageCard p {
-    font-size: 13px;
+    font-size: 12px;
   }
 }

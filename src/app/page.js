@@ -13,9 +13,65 @@ import footerStyles from "./styles/footer.module.css";
 
 export default function Home() {
   const [expandedFAQ, setExpandedFAQ] = useState(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [formErrors, setFormErrors] = useState({});
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   const toggleFAQ = (index) => {
     setExpandedFAQ(expandedFAQ === index ? null : index);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: ""
+      }));
+    }
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) {
+      errors.name = "Name is required";
+    }
+    if (!formData.email.trim()) {
+      errors.email = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = "Please enter a valid email";
+    }
+    if (!formData.message.trim()) {
+      errors.message = "Message is required";
+    }
+    return errors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = validateForm();
+    
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    // Here you would normally send the data to your backend
+    console.log("Form submitted:", formData);
+    setSubmitStatus("success");
+    setFormData({ name: "", email: "", message: "" });
+    
+    // Clear success message after 3 seconds
+    setTimeout(() => setSubmitStatus(null), 3000);
   };
 
   const faqItems = [
@@ -65,9 +121,62 @@ export default function Home() {
           <div className={introStyles.introContent}>
             <h1 className={introStyles.title}>Üdvözöljük a Portfólióban</h1>
             <p className={introStyles.introText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
+          
+          <form className={introStyles.contactForm} onSubmit={handleSubmit}>
+            <div className={introStyles.formGroup}>
+              <label htmlFor="name" className={introStyles.formLabel}>Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className={introStyles.formInput}
+                placeholder="Your name"
+              />
+              {formErrors.name && <span className={introStyles.errorMessage}>{formErrors.name}</span>}
+            </div>
+
+            <div className={introStyles.formGroup}>
+              <label htmlFor="email" className={introStyles.formLabel}>Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className={introStyles.formInput}
+                placeholder="your@email.com"
+              />
+              {formErrors.email && <span className={introStyles.errorMessage}>{formErrors.email}</span>}
+            </div>
+
+            <div className={introStyles.formGroup}>
+              <label htmlFor="message" className={introStyles.formLabel}>Message *</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleInputChange}
+                className={introStyles.formTextarea}
+                placeholder="Your message..."
+              />
+              {formErrors.message && <span className={introStyles.errorMessage}>{formErrors.message}</span>}
+            </div>
+
+            <button type="submit" className={introStyles.submitBtn}>
+              Send Message
+            </button>
+
+            {submitStatus === "success" && (
+              <div style={{ color: "#4ade80", fontSize: "14px", textAlign: "center", marginTop: "10px" }}>
+                ✓ Message sent successfully!
+              </div>
+            )}
+          </form>
         </section>
 
         {/* Portfolio Works Section */}

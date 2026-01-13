@@ -5,15 +5,15 @@
   --primary-light: rgba(100, 200, 255, 0.7);
   --primary-lighter: rgba(100, 200, 255, 0.15);
   --primary-lightest: rgba(100, 200, 255, 0.1);
-  --secondary-text: #b0b0b0;
-  --background-dark: #050810;
-  --background-darker: #0a0f1f;
-  --background-darkest: #0f0820;
-  --card-background: rgba(30, 35, 65, 0.4);
-  --card-background-hover: rgba(30, 35, 65, 0.6);
-  --card-border: rgba(100, 200, 255, 0.2);
-  --card-border-hover: rgba(100, 200, 255, 0.35);
-  --glass-background: rgba(5, 8, 16, 0.95);
+  --secondary-text: #d0d0d0;
+  --background-dark: #020305;
+  --background-darker: #030508;
+  --background-darkest: #040609;
+  --card-background: rgba(20, 25, 50, 0.5);
+  --card-background-hover: rgba(30, 40, 70, 0.7);
+  --card-border: rgba(100, 200, 255, 0.15);
+  --card-border-hover: rgba(100, 200, 255, 0.3);
+  --glass-background: rgba(2, 3, 5, 0.98);
 }
 
 /* Container Base Styles */
@@ -21,8 +21,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 50%, rgba(50, 20, 100, 0.4) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(20, 50, 100, 0.4) 0%, transparent 50%),
+  background: radial-gradient(circle at 20% 50%, rgba(30, 15, 60, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(15, 30, 60, 0.3) 0%, transparent 50%),
     linear-gradient(135deg, var(--background-dark) 0%, var(--background-darker) 50%, var(--background-darkest) 100%);
   background-attachment: fixed;
   position: relative;
@@ -49,7 +49,7 @@
   background-size: 200% 200%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.3;
+  opacity: 0.15;
 }
 
 .container > * {
