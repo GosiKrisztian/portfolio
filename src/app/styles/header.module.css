@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url(RobotoMono-VariableFont_wght.ttf);
+}
+
 /* Header Navigation */
 .header {
   width: 100%;
@@ -33,13 +38,14 @@
 }
 
 .navLink {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: bold;
   color: rgba(100, 200, 255, 0.8);
   padding: 10px 16px;
   border-radius: 6px;
   transition: all 0.3s ease;
   text-decoration: none;
+  font-family: 'Roboto Mono';
 }
 
 .navLink:hover {

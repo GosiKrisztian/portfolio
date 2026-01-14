@@ -12,6 +12,7 @@ import formStyles from "./styles/form.module.css";
 import faqStyles from "./styles/faq.module.css";
 import footerStyles from "./styles/footer.module.css";
 
+
 export default function Home() {
   const [expandedFAQ, setExpandedFAQ] = useState(null);
   const [formData, setFormData] = useState({
@@ -57,7 +58,9 @@ export default function Home() {
     return errors;
   };
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateForm();
     
@@ -66,13 +69,31 @@ export default function Home() {
       return;
     }
 
-    // Here you would normally send the data to your backend
-    console.log("Form submitted:", formData);
-    setSubmitStatus("success");
-    setFormData({ name: "", email: "", message: "" });
-    
-    // Clear success message after 3 seconds
-    setTimeout(() => setSubmitStatus(null), 3000);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setSubmitStatus(null), 3000);
+      } else {
+        setSubmitStatus("error");
+        console.error('Error:', data.error);
+        setTimeout(() => setSubmitStatus(null), 3000);
+      }
+    } catch (error) {
+      console.error('Error sending form:', error);
+      setSubmitStatus("error");
+      setTimeout(() => setSubmitStatus(null), 3000);
+    }
   };
 
   const faqItems = [
@@ -109,7 +130,7 @@ export default function Home() {
           <a href="#partners" className={headerStyles.navLink}>
             Partnerek
           </a>
-          <a href="#contact" className={headerStyles.navLink}>
+          <a href="#footer" className={headerStyles.navLink}>
             Kapcsolat
           </a>
         </nav>
@@ -165,7 +186,7 @@ export default function Home() {
               <textarea
                 id="message"
                 name="message"
-                maxLength="500"
+                maxLength="2000"
                 value={formData.message}
                 onChange={handleInputChange}
                 className={formStyles.formTextarea}
@@ -183,6 +204,11 @@ export default function Home() {
                 ✓ Üzenet sikeresen elküldve!
               </div>
             )}
+            {submitStatus === "error" && (
+              <div style={{ color: "#ff6b6b", fontSize: "14px", textAlign: "center", marginTop: "10px" }}>
+                ✗ Hiba az üzenet küldése során. Kérem próbálja később.
+              </div>
+            )}
           </form>
         </section>
 
@@ -191,10 +217,8 @@ export default function Home() {
           <h2 className={worksStyles.sectionTitle}>Munkáink</h2>
           <div className={worksStyles.galleryContainer}>
             <div className={worksStyles.imageCard}>
-              <div className={worksStyles.imagePlaceholder}>
-                <span>Kép 1</span>
-              </div>
-              <h3>Projekt 1</h3>
+              <img src="../pics/jedlik_projekt_01.jpg" alt="Jedlikes projekt" />
+              <h3>Jedlik hibabejelentő oldal</h3>
               <p>Kitűnő dizájn és funkcionalitás</p>
             </div>
             <div className={worksStyles.imageCard}>
@@ -220,14 +244,6 @@ export default function Home() {
               <p>Szakterületünk vezetője</p>
             </div>
           </div>
-        </section>
-
-        {/* Contact Section */}
-        <section className={contactStyles.contactSection} id="contact">
-          <h2 className={contactStyles.sectionTitle}>Kapcsolat</h2>
-          <p className={contactStyles.contactText}>
-            Érdekelnek a projektjeink? Vegyél fel velünk kapcsolatot!
-          </p>
         </section>
 
         {/* FAQ Section */}
@@ -257,25 +273,77 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className={footerStyles.footer}>
+      <footer className={footerStyles.footer} id="footer">
         <div className={footerStyles.footerContent}>
-          <p>&copy; 2026 PixelPitchPartners. Minden jog fenntartva.</p>
-          <div className={footerStyles.footerLinks}>
-            <a href="#about">Rólunk</a>
-            <a href="#works">Munkáink</a>
-            <a href="#partners">Partnerek</a>
-            <a href="#contact">Kapcsolat</a>
+          {/* Left Column - Logo and Copyright */}
+          <div className={footerStyles.footerLeft}>
+            <h3 className={footerStyles.footerLogo}>PixelPitchPartners</h3>
+            <p className={footerStyles.footerCopyright}>&copy; 2026 PixelPitchPartners. Minden jog fenntartva.</p>
           </div>
-          <div className={footerStyles.socialLinks}>
-            <a href="#facebook" className={footerStyles.socialLink} title="Facebook">
-              f
-            </a>
-            <a href="#instagram" className={footerStyles.socialLink} title="Instagram">
-              📷
-            </a>
-            <a href="#linkedin" className={footerStyles.socialLink} title="LinkedIn">
-              in
-            </a>
+
+          {/* Middle Column - Contact Info */}
+          <div className={footerStyles.footerMiddle}>
+            <h4 className={footerStyles.columnTitle}>Megoldásaink</h4>
+            <ul className={footerStyles.footerList}>
+              <li>Egyedi weboldal fejlesztés</li>
+              <li>Egyedi webshop fejlesztés</li>
+              <li>Keresőoptimalizálás (SEO)</li>
+            </ul>
+          </div>
+
+          {/* Right Column - Social Links */}
+          <div className={footerStyles.footerRight}>
+            <h4 className={footerStyles.columnTitle}>Kapcsolat</h4>
+          <div className={footerStyles.contactInfo}>
+            <div className={footerStyles.infoItem}>
+            <span className={footerStyles.infoLabel}>Telefonszám</span>
+            <span className={footerStyles.infoValue}>+36 30 316 3943</span>
+            <span className={footerStyles.infoValue}>+36 30 123 4567</span>
+          </div>
+          <div className={footerStyles.infoItem}>
+            <span className={footerStyles.infoLabel}>Email cím</span>
+            <span className={footerStyles.infoValue}>hello@pixelpitchpartners.com</span>
+            <span className={footerStyles.infoValue}>info@pixelpitchpartners.com</span>
+          </div>
+          </div>
+            <div className={footerStyles.socialLinks}>
+              {/* Facebook */}
+              <a 
+                href="https://facebook.com" 
+                className={footerStyles.socialLink} 
+                title="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a 
+                href="https://instagram.com" 
+                className={footerStyles.socialLink} 
+                title="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4c0 3.2-2.6 5.8-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2m-.3 2C5.3 4 4 5.3 4 7.5v9c0 2.2 1.3 3.5 3.5 3.5h9c2.2 0 3.5-1.3 3.5-3.5v-9c0-2.2-1.3-3.5-3.5-3.5h-9m11.2 1.5a1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5m-5.8 1.5c3.3 0 6 2.7 6 6s-2.7 6-6 6-6-2.7-6-6 2.7-6 6-6m0 2c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z"/>
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a 
+                href="https://linkedin.com" 
+                className={footerStyles.socialLink} 
+                title="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>

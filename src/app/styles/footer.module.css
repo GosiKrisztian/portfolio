@@ -1,62 +1,125 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url(RobotoMono-VariableFont_wght.ttf);
+}
+
 /* Footer */
 .footer {
   background: rgba(2, 3, 5, 0.98);
   border-top: 1px solid rgba(100, 200, 255, 0.1);
-  padding: 30px 20px;
-  margin-top: 40px;
+  padding: 60px 20px 30px 20px;
 }
 
 .footerContent {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 30px;
+  /* border-bottom: 1px solid rgba(100, 200, 255, 0.1); */
 }
 
-.footerContent p {
+.footerLeft, .footerMiddle, .footerRight {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start; /* Ez kényszeríti a balra zárást */
+  justify-content: flex-start;
+}
+
+.footerLogo {
+  font-size: 30px;
+  font-weight: 800;
+  color: #64c8ff;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
+  margin: 0;
+}
+
+.footerCopyright {
   color: #d0d0d0;
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
+  opacity: 0.8;
 }
 
-.footerLinks {
-  display: flex;
-  gap: 18px;
-  flex-wrap: wrap;
-}
-
-.footerLinks a {
-  color: rgba(100, 200, 255, 0.6);
-  text-decoration: none;
-  font-size: 13px;
-  transition: all 0.3s ease;
-}
-
-.footerLinks a:hover {
+/* Mindkét oszlop címére vonatkozik */
+.columnTitle {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Roboto Mono', monospace;
   color: #64c8ff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: left;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.infoLabel {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Roboto Mono', monospace;
+  color: #64c8ff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Ez a kapcsolat rész elemei */
+.infoValue {
+  color: #d0d0d0;
+  font-size: 16px;
+  font-family: 'Roboto Mono';
+  display: block;
+}
+
+.footerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerList li {
+  color: #d0d0d0;
+  font-size: 16px;
+  font-family: 'Roboto Mono';
+  opacity: 0.9;
 }
 
 .socialLinks {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 10px;
 }
 
 .socialLink {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   background: rgba(100, 200, 255, 0.08);
   border: 1px solid rgba(100, 200, 255, 0.2);
   border-radius: 50%;
   color: #64c8ff;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 700;
   transition: all 0.3s ease;
 }
 
@@ -64,31 +127,53 @@
   background: rgba(100, 200, 255, 0.15);
   color: #ffffff;
   box-shadow: 0 0 12px rgba(100, 200, 255, 0.3);
+  transform: translateY(-3px);
 }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer {
-    padding: 25px 15px;
+    padding: 50px 15px 25px 15px;
+  }
+
+  .footerContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .footerRight {
+    align-items: center;
   }
 }
 
 @media (max-width: 640px) {
-  .footerContent {
-    flex-direction: column;
-    text-align: center;
-    gap: 18px;
+  .footer {
+    padding: 40px 15px 20px 15px;
   }
 
-  .footerLinks {
-    justify-content: center;
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .footerLeft,
+  .footerMiddle,
+  .footerRight {
+    text-align: center;
+    align-items: center;
+  }
+
+  .footerRight {
+    align-items: center;
   }
 
   .socialLinks {
     justify-content: center;
   }
 
-  .footerContent p {
-    font-size: 12px;
+  .socialLink {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
   }
 }

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url(RobotoMono-VariableFont_wght.ttf);
+}
+
 /* Color Variables */
 :root {
   --primary-color: #64c8ff;

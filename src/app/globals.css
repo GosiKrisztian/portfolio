@@ -40,3 +40,7 @@ a {
     color-scheme: dark;
   }
 }
+
+section[id], div[id] {
+  scroll-margin-top: 100px; /* Ide kb. a header magassága + 20px kell */
+}

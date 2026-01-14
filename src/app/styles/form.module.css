@@ -1,7 +1,12 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url(RobotoMono-VariableFont_wght.ttf);
+}
+
 /* Contact Form Styles */
 .contactForm {
   background: rgba(20, 25, 50, 0.6);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   border: 1px solid rgba(100, 200, 255, 0.2);
   border-radius: 12px;
   padding: 30px;
@@ -29,12 +34,13 @@
 }
 
 .formLabel {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #64c8ff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-left: 2px;
+  font-family: 'Roboto Mono';
 }
 
 .formInput,
@@ -45,8 +51,7 @@
   border-radius: 6px;
   color: #d0d0d0;
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: all 0.3s ease;
+  font-family: 'Roboto Mono';
 }
 
 .formInput:focus,
@@ -60,7 +65,8 @@
 .formTextarea {
   resize: vertical;
   min-height: 120px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-height: 400px;
+  font-family: 'Roboto Mono';
 }
 
 .errorMessage {
@@ -76,8 +82,9 @@
   border: 1px solid rgba(100, 200, 255, 0.3);
   border-radius: 6px;
   color: #64c8ff;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'Roboto Mono';
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url(RobotoMono-VariableFont_wght.ttf);
+}
+
 /* Contact Section */
 .contactSection {
   margin-bottom: 50px;
