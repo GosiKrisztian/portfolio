@@ -16,11 +16,11 @@
   color: #64c8ff;
 }
 
-.galleryContainer {
+/* .galleryContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-}
+} 
 
 .imageCard {
   background: rgba(20, 25, 50, 0.5);
@@ -61,7 +61,7 @@
   padding: 0 16px 16px;
   color: #d0d0d0;
   margin: 0;
-}
+} */
 
 /* Responsive Design */
 @media (max-width: 1024px) {
@@ -96,4 +96,132 @@
   .imageCard p {
     font-size: 12px;
   }
+}
+
+/* Galéria tároló */
+.galleryContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Egy darab kártya */
+.imageCard {
+  background: rgba(20, 25, 50, 0.5);
+  border: 1px solid rgba(100, 200, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden; /* Ez levágja a kilógó képet */
+  transition: transform 0.3s ease;
+}
+
+/* A kép a kártyán belül (EZ A KULCS) */
+.imageCard img {
+  width: 100%;
+  height: 200px; /* Fix magasság a kártyának */
+  object-fit: cover; /* Kitölti a helyet torzítás nélkül */
+  display: block;
+}
+
+.imageCard h3 {
+  padding: 15px 15px 5px 15px;
+  margin: 0;
+  color: #64c8ff;
+  font-size: 18px;
+}
+
+.imageCard p {
+  padding: 0 15px 15px 15px;
+  margin: 0;
+  color: #d0d0d0;
+  font-size: 13px;
+}
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(8px);
+  padding: 100px 20px 40px 20px;
+}
+
+.modalContent {
+  background: rgba(10, 15, 30, 0.98);
+  border: 1px solid rgba(100, 200, 255, 0.4);
+  border-radius: 15px;
+  padding: 45px 30px 30px 30px;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  margin-top: auto; /* Ezek segítenek, hogy ha kicsi a tartalom, */
+  margin-bottom: auto; /* akkor mégis középen maradjon */
+  box-shadow: 0 0 50px rgba(0, 0, 0, 1), 0 0 20px rgba(100, 200, 255, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(100, 200, 255, 0.2);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64c8ff;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 11000; /* Biztosan a kép felett legyen */
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(255, 107, 107, 0.2);
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+  transform: rotate(90deg);
+}
+
+.modalImage {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.modalContent h2 {
+  color: #64c8ff;
+  font-size: 24px;
+  margin: 0 0 15px 0;
+}
+
+.modalContent p {
+  color: #d0d0d0;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
 }

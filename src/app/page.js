@@ -22,6 +22,8 @@ export default function Home() {
   });
   const [formErrors, setFormErrors] = useState({});
   const [submitStatus, setSubmitStatus] = useState(null);
+  const [selectedWork, setSelectedWork] = useState(null);
+  const [selectedPartner, setSelectedPartner] = useState(null);
 
   const toggleFAQ = (index) => {
     setExpandedFAQ(expandedFAQ === index ? null : index);
@@ -112,6 +114,38 @@ export default function Home() {
     {
       question: "Van-e korlátlan támogatás után a projekt befejezése után?",
       answer: "Igen, a projekt után tartós támogatást és karbantartást nyújtunk az ügyfeleknek. A részleteket az ügyfélszolgálatunkkal meg lehet beszélni."
+    }
+  ];
+
+  const workItems = [
+    {
+      id: 1,
+      title: "Jedlik hibabejelentő oldal",
+      shortDesc: "Kitűnő dizájn és funkcionalitás",
+      image: "/pics/jedlik_projekt_01.jpg",
+      detailedDesc: "Az Jedlik hibabejelentő oldal egy modern, felhasználóbarát platform, amely lehetővé teszi az intézmény számára a hibák és problémák gyors bejelentését. Az oldal intuitív felületre, erőteljes funkcionalitásra és kiemelkedő dizájnra készült, biztosítva a zökkenőmentes felhasználói élményt."
+    },
+    {
+      id: 2,
+      title: "Szakjelentés weboldal",
+      shortDesc: "Innovatív megoldások",
+      image: "/pics/szakjelentes.png",
+      detailedDesc: "A Szakjelentés weboldal egy professzionális platform, amely a szervezeti jelentések összeállítására és megosztására van optimalizálva. Nagyobb interaktivitást és vizualizációs lehetőségeket biztosít a hatékony adatközléshez."
+    }
+  ];
+
+  const partnerItems = [
+    {
+      id: 1,
+      name: "Partner 1",
+      shortDesc: "Megbízható partner az innováció terén",
+      detailedDesc: "Egy vezető szoftverfejlesztési vállalat, amely több mint 10 év tapasztalattal rendelkezik az innovatív megoldások biztosításában. Szorosan együttműködünk az ügyfélközpontú projektfejlesztésben."
+    },
+    {
+      id: 2,
+      name: "Partner 2",
+      shortDesc: "Szakterületünk vezetője",
+      detailedDesc: "Az ipar prominens szereplője, aki a digitális transzformáció és technológiai fejlesztés terén jár az élen. Megoldásaik világszínvonalúak és hosszú ideig tartóak."
     }
   ];
 
@@ -216,34 +250,65 @@ export default function Home() {
         <section className={worksStyles.worksSection} id="works">
           <h2 className={worksStyles.sectionTitle}>Munkáink</h2>
           <div className={worksStyles.galleryContainer}>
-            <div className={worksStyles.imageCard}>
-              <img src="../pics/jedlik_projekt_01.jpg" alt="Jedlikes projekt" />
-              <h3>Jedlik hibabejelentő oldal</h3>
-              <p>Kitűnő dizájn és funkcionalitás</p>
-            </div>
-            <div className={worksStyles.imageCard}>
-              <div className={worksStyles.imagePlaceholder}>
-                <span>Kép 2</span>
+            {workItems.map((work) => (
+              <div 
+                key={work.id} 
+                className={worksStyles.imageCard}
+                onClick={() => setSelectedWork(work)}
+                style={{ cursor: 'pointer' }}
+              >
+                <img src={work.image} alt={work.title} />
+                <h3>{work.title}</h3>
+                <p>{work.shortDesc}</p>
               </div>
-              <h3>Projekt 2</h3>
-              <p>Innovatív megoldások</p>
-            </div>
+            ))}
           </div>
+
+          {/* Work Modal */}
+          {selectedWork && (
+            <div className={worksStyles.modalOverlay} onClick={() => setSelectedWork(null)}>
+              <div className={worksStyles.modalContent} onClick={(e) => e.stopPropagation()}>
+                <button className={worksStyles.closeButton} onClick={() => setSelectedWork(null)}>
+                  ✕
+                </button>
+                <img src={selectedWork.image} alt={selectedWork.title} className={worksStyles.modalImage} />
+                <h2>{selectedWork.title}</h2>
+                <p>{selectedWork.detailedDesc}</p>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* Partners Section */}
         <section className={partnersStyles.partnersSection} id="partners">
           <h2 className={partnersStyles.sectionTitle}>Partnerek</h2>
           <div className={partnersStyles.partnersContainer}>
-            <div className={partnersStyles.partnerCard}>
-              <div className={partnersStyles.partnerLogo}>Partner 1</div>
-              <p>Megbízható partner az innováció terén</p>
-            </div>
-            <div className={partnersStyles.partnerCard}>
-              <div className={partnersStyles.partnerLogo}>Partner 2</div>
-              <p>Szakterületünk vezetője</p>
-            </div>
+            {partnerItems.map((partner) => (
+              <div 
+                key={partner.id}
+                className={partnersStyles.partnerCard}
+                onClick={() => setSelectedPartner(partner)}
+                style={{ cursor: 'pointer' }}
+              >
+                <div className={partnersStyles.partnerLogo}>{partner.name}</div>
+                <p>{partner.shortDesc}</p>
+              </div>
+            ))}
           </div>
+
+          {/* Partner Modal */}
+          {selectedPartner && (
+            <div className={partnersStyles.modalOverlay} onClick={() => setSelectedPartner(null)}>
+              <div className={partnersStyles.modalContent} onClick={(e) => e.stopPropagation()}>
+                <button className={partnersStyles.closeButton} onClick={() => setSelectedPartner(null)}>
+                  ✕
+                </button>
+                <h2>{selectedPartner.name}</h2>
+                <p>{selectedPartner.shortDesc}</p>
+                <p>{selectedPartner.detailedDesc}</p>
+              </div>
+            </div>
+          )}
         </section>
 
         {/* FAQ Section */}
