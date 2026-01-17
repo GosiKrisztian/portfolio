@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from 'react';
 import containerStyles from "./styles/variables.module.css";
 import headerStyles from "./styles/header.module.css";
 import mainStyles from "./styles/main.module.css";
@@ -23,6 +24,19 @@ export default function Home() {
   const [formErrors, setFormErrors] = useState({});
   const [submitStatus, setSubmitStatus] = useState(null);
   const [selectedWork, setSelectedWork] = useState(null);
+
+  useEffect(() => {
+    if (selectedWork) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedWork]);
+
   const [selectedPartner, setSelectedPartner] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -122,14 +136,14 @@ export default function Home() {
       id: 1,
       title: "Jedlik hibabejelentő oldal",
       shortDesc: "Kitűnő dizájn és funkcionalitás",
-      image: "/pics/jedlik_projekt_01.jpg",
+      images: ["/pics/jedlik_projekt_01.jpg"],
       detailedDesc: "Az Jedlik hibabejelentő oldal egy modern, felhasználóbarát platform, amely lehetővé teszi az intézmény számára a hibák és problémák gyors bejelentését. Az oldal intuitív felületre, erőteljes funkcionalitásra és kiemelkedő dizájnra készült, biztosítva a zökkenőmentes felhasználói élményt."
     },
     {
       id: 2,
       title: "Szakjelentés weboldal",
       shortDesc: "Innovatív megoldások",
-      image: "/pics/szakjelentes.png",
+      images: ["/pics/szakjelentes.png", "/pics/szakjelentes02.png" ],
       detailedDesc: "A Szakjelentés weboldal egy professzionális platform, amely a szervezeti jelentések összeállítására és megosztására van optimalizálva. Nagyobb interaktivitást és vizualizációs lehetőségeket biztosít a hatékony adatközléshez."
     }
   ];
@@ -148,6 +162,31 @@ export default function Home() {
       detailedDesc: "Az ipar prominens szereplője, aki a digitális transzformáció és technológiai fejlesztés terén jár az élen. Megoldásaik világszínvonalúak és hosszú ideig tartóak."
     }
   ];
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Amikor megnyitod a modált, nullázd le az indexet:
+const openModal = (work) => {
+  setCurrentImageIndex(0);
+  setSelectedWork(work);
+};
+
+// Váltó funkciók
+const nextImage = (e) => {
+  e.stopPropagation(); // Hogy ne záródjon be a modal
+  setCurrentImageIndex((prev) => (prev + 1) % selectedWork.images.length);
+};
+
+const prevImage = (e) => {
+  e.stopPropagation();
+  setCurrentImageIndex((prev) => (prev - 1 + selectedWork.images.length) % selectedWork.images.length);
+}
+
+// Ezt a függvényt a return elé tedd
+const handleOpenModal = (work) => {
+  setCurrentImageIndex(0); // Visszaállítjuk az első képre
+  setSelectedWork(work);   // Beállítjuk a kiválasztott munkát
+};
 
   return (
     <div className={containerStyles.container}> 
@@ -254,10 +293,10 @@ export default function Home() {
               <div 
                 key={work.id} 
                 className={worksStyles.imageCard}
-                onClick={() => setSelectedWork(work)}
+                onClick={() => handleOpenModal(work)}
                 style={{ cursor: 'pointer' }}
               >
-                <img src={work.image} alt={work.title} />
+                <img src={work.images[0]} alt={work.title} />
                 <h3>{work.title}</h3>
                 <p>{work.shortDesc}</p>
               </div>
@@ -271,7 +310,18 @@ export default function Home() {
                 <button className={worksStyles.closeButton} onClick={() => setSelectedWork(null)}>
                   ✕
                 </button>
-                <img src={selectedWork.image} alt={selectedWork.title} className={worksStyles.modalImage} />
+
+                <div className={worksStyles.imageSliderContainer}>
+                  {selectedWork?.images?.length > 1 && ( 
+                    <>
+                      <button className={worksStyles.navButtonLeft} onClick={prevImage}>❮</button>
+                      <button className={worksStyles.navButtonRight} onClick={nextImage}>❯</button>
+                    </>
+                  )}
+
+                  <img src={selectedWork.images[currentImageIndex]} alt={selectedWork.title} className={worksStyles.modalImage} />
+                </div>
+
                 <h2>{selectedWork.title}</h2>
                 <p>{selectedWork.detailedDesc}</p>
               </div>

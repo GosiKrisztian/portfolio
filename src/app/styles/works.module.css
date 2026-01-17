@@ -149,9 +149,10 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  z-index: 10000;
+  z-index: 99999;
   backdrop-filter: blur(8px);
-  padding: 100px 20px 40px 20px;
+  padding: 100px 20px 60px 20px;
+  overflow-y: auto;
 }
 
 .modalContent {
@@ -162,8 +163,9 @@
   max-width: 800px;
   width: 100%;
   position: relative;
+  height: auto;
   margin-top: auto; /* Ezek segítenek, hogy ha kicsi a tartalom, */
-  margin-bottom: auto; /* akkor mégis középen maradjon */
+  margin-bottom: 20px;
   box-shadow: 0 0 50px rgba(0, 0, 0, 1), 0 0 20px rgba(100, 200, 255, 0.2);
 }
 
@@ -224,4 +226,33 @@
   font-size: 14px;
   line-height: 1.6;
   margin: 0;
+}
+
+.imageSliderContainer {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.navButtonLeft, .navButtonRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(10, 15, 30, 0.7);
+  border: 1px solid rgba(100, 200, 255, 0.5);
+  color: #64c8ff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.navButtonLeft { left: 10px; }
+.navButtonRight { right: 10px; }
+
+.navButtonLeft:hover, .navButtonRight:hover {
+  background: rgba(100, 200, 255, 0.3);
+  color: white;
 }
