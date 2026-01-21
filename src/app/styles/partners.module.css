@@ -26,7 +26,7 @@
   background: rgba(20, 25, 50, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 10px;
-  padding: 24px;
+  padding: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(100, 200, 255, 0.15);
   text-align: center;
@@ -39,10 +39,22 @@
 }
 
 .partnerLogo {
+  width: 100%;
+  max-width: 220px; /* Vagy amennyit jónak látsz a kártyán belül */
+  height: auto; /* Fix magasság, hogy egységesek legyenek a kártyák */
+  max-height: 140px;
+  object-fit: contain; /* Ez megvédi a logót a torzulástól */
+  display: block;
+  margin: 0 auto; 
+}
+
+.partnerName {
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-top: 15px;
+  margin-bottom: 8px;
   color: #64c8ff;
+  text-align: center;
 }
 
 .partnerCard p {
@@ -84,13 +96,15 @@
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
+  padding: 120px 20px 40px 20px;
   justify-content: center;
-  z-index: 1000;
+  z-index: 999999;
   backdrop-filter: blur(5px);
+  overflow-y: auto;
 }
 
 .modalContent {
-  background: rgba(20, 25, 50, 0.95);
+  background: rgba(20, 25, 50, 1);
   border: 1px solid rgba(100, 200, 255, 0.3);
   border-radius: 10px;
   padding: 30px;
@@ -99,6 +113,36 @@
   position: relative;
   box-shadow: 0 10px 50px rgba(100, 200, 255, 0.2);
   animation: slideIn 0.3s ease;
+  max-height: 75vh;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+/* Opcionális: Szebb görgetősáv a modalon belül */
+.modalContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: rgba(100, 200, 255, 0.3);
+  border-radius: 10px;
+}
+
+.modalLogoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px; /* Távolság a logó és a név között */
+  background: rgba(255, 255, 255, 0.1); /* Nagyon halvány háttér, hogy kiemelje a logót */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.modalLogoImage {
+  max-width: 100%;
+  max-height: 100px; /* Korlátozzuk a magasságot, hogy maradjon hely a szövegnek is */
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.2));
 }
 
 @keyframes slideIn {
@@ -114,19 +158,28 @@
 
 .closeButton {
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: none;
-  border: none;
+  top: 10px;
+  right: 10px;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(100, 200, 255, 0.5);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #64c8ff;
   font-size: 24px;
   cursor: pointer;
-  padding: 5px 10px;
-  transition: color 0.2s ease;
+  z-index: 11000;
+  transition: all 0.3s ease;
 }
 
 .closeButton:hover {
   color: #ff6b6b;
+  color: white;
+  transform: rotate(90deg);
+  border-color: #ff6b6b;
 }
 
 .modalContent h2 {

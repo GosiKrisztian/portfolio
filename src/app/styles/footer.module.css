@@ -7,7 +7,7 @@
 .footer {
   background: rgba(2, 3, 5, 0.98);
   border-top: 1px solid rgba(100, 200, 255, 0.1);
-  padding: 60px 20px 30px 20px;
+  padding: 30px 20px 30px 20px;
 }
 
 .footerContent {
@@ -29,12 +29,27 @@
 }
 
 .footerLogo {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 800;
   color: #64c8ff;
   letter-spacing: 1px;
   text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
   margin: 0;
+}
+
+.logoWrapper {
+  display: flex;
+  flex-direction: column; /* Egymás alá rakja a logót és a szöveget */
+  align-items: flex-start; /* Balra igazítja őket (vagy 'center', ha középen szeretnéd) */
+  gap: 15px; /* Távolság a nagy logó és a szöveg között */
+  margin-bottom: 10px;
+}
+
+.footerLogoImage {
+  width: 100px; /* Itt állítsd a méretet, a 40px általában ideális a footerbe */
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 5px rgba(100, 200, 255, 0.3));
 }
 
 .footerCopyright {

@@ -22,8 +22,9 @@
   z-index: 9999; /* Nagyon magas érték, hogy semmi ne takarja el */
 }
 
+/*Geminiben logotext*/
 .logo {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 800;
   color: #64c8ff;
   letter-spacing: 1px;
@@ -52,6 +53,19 @@
   color: #ffffff;
   background: rgba(100, 200, 255, 0.2);
   transform: translate(-2px);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Kis távolság a logó és a szöveg között */
+}
+
+.logoImage {
+  width: 75px;  
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.3));
 }
 
 /* Responsive Design */

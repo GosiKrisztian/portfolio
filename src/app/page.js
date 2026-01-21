@@ -24,9 +24,10 @@ export default function Home() {
   const [formErrors, setFormErrors] = useState({});
   const [submitStatus, setSubmitStatus] = useState(null);
   const [selectedWork, setSelectedWork] = useState(null);
+  const [selectedPartner, setSelectedPartner] = useState(null);
 
   useEffect(() => {
-    if (selectedWork) {
+    if (selectedPartner || selectedWork) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -35,9 +36,9 @@ export default function Home() {
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [selectedWork]);
+  }, [selectedPartner, selectedWork]);
 
-  const [selectedPartner, setSelectedPartner] = useState(null);
+  
 
   const toggleFAQ = (index) => {
     setExpandedFAQ(expandedFAQ === index ? null : index);
@@ -137,7 +138,7 @@ export default function Home() {
       title: "Jedlik hibabejelentő oldal",
       shortDesc: "Kitűnő dizájn és funkcionalitás",
       images: ["/pics/jedlik_projekt_01.jpg"],
-      detailedDesc: "Az Jedlik hibabejelentő oldal egy modern, felhasználóbarát platform, amely lehetővé teszi az intézmény számára a hibák és problémák gyors bejelentését. Az oldal intuitív felületre, erőteljes funkcionalitásra és kiemelkedő dizájnra készült, biztosítva a zökkenőmentes felhasználói élményt."
+      detailedDesc: "Az Jedlik hibabejelentő oldal egy modern, felhasználóbarát platform, amely lehetővé teszi az intézmény számára a hibák és problémák gyors bejelentését. Az oldal intuitív felületre, erőteljes funkcionalitásra és kiemelkedő dizájnra készült, biztosítva a zökkenőmentes felhasználói élményt. Az Jedlik hibabejelentő oldal egy modern, felhasználóbarát platform, amely lehetővé teszi az intézmény számára a hibák és problémák gyors bejelentését. Az oldal intuitív felületre, erőteljes funkcionalitásra és kiemelkedő dizájnra készült, biztosítva a zökkenőmentes felhasználói élményt. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. "
     },
     {
       id: 2,
@@ -152,8 +153,9 @@ export default function Home() {
     {
       id: 1,
       name: "Partner 1",
+      logo: "pics/sze_logo.png",
       shortDesc: "Megbízható partner az innováció terén",
-      detailedDesc: "Egy vezető szoftverfejlesztési vállalat, amely több mint 10 év tapasztalattal rendelkezik az innovatív megoldások biztosításában. Szorosan együttműködünk az ügyfélközpontú projektfejlesztésben."
+      detailedDesc: "Egy vezető szoftverfejlesztési vállalat, amely több mint 10 év tapasztalattal rendelkezik az innovatív megoldások biztosításában. Szorosan együttműködünk az ügyfélközpontú projektfejlesztésben. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lore  m ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit.  lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit.  lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem ipsum dolor sit amet, consectetur adipiscing elit. "
     },
     {
       id: 2,
@@ -192,7 +194,13 @@ const handleOpenModal = (work) => {
     <div className={containerStyles.container}> 
       {/* Header Navigation */}
       <header className={headerStyles.header}>
-        <div className={headerStyles.logo}>PixelPitchPartners</div>
+        <div className={headerStyles.logoContainer}>
+          <img 
+            src="/pics/logo_hatter_nelkul.png" 
+            alt="PixelPitchPartners Logo" 
+            className={headerStyles.logoImage} 
+          />
+        <div className={headerStyles.logo}>PixelPitchPartners</div> </div>
         <nav className={headerStyles.nav}>
           <a href="#about" className={headerStyles.navLink}>
             Rólunk
@@ -340,7 +348,10 @@ const handleOpenModal = (work) => {
                 onClick={() => setSelectedPartner(partner)}
                 style={{ cursor: 'pointer' }}
               >
-                <div className={partnersStyles.partnerLogo}>{partner.name}</div>
+                <div className={partnersStyles.logoWrapper}>
+                 <img src={partner.logo} alt={partner.name} className={partnersStyles.partnerLogo} />
+                </div>
+                <h3 className={partnersStyles.partnerName}>{partner.name}</h3>
                 <p>{partner.shortDesc}</p>
               </div>
             ))}
@@ -353,6 +364,16 @@ const handleOpenModal = (work) => {
                 <button className={partnersStyles.closeButton} onClick={() => setSelectedPartner(null)}>
                   ✕
                 </button>
+                {/* A LOGÓ MEGVALÓSÍTÁSA A MODÁLBAN */}
+                {selectedPartner.logo && (
+                  <div className={partnersStyles.modalLogoContainer}>
+                    <img 
+                      src={selectedPartner.logo} 
+                      alt={selectedPartner.name} 
+                      className={partnersStyles.modalLogoImage} 
+                    />
+                  </div>
+                )}
                 <h2>{selectedPartner.name}</h2>
                 <p>{selectedPartner.shortDesc}</p>
                 <p>{selectedPartner.detailedDesc}</p>
@@ -392,7 +413,10 @@ const handleOpenModal = (work) => {
         <div className={footerStyles.footerContent}>
           {/* Left Column - Logo and Copyright */}
           <div className={footerStyles.footerLeft}>
-            <h3 className={footerStyles.footerLogo}>PixelPitchPartners</h3>
+            <div className={footerStyles.logoWrapper}>
+              <img src="/pics/logo_hatter_nelkul.png" alt="PixelPitchPartners Logo" className={footerStyles.footerLogoImage} />
+              <h3 className={footerStyles.footerLogo}>PixelPitchPartners</h3>
+            </div>
             <p className={footerStyles.footerCopyright}>&copy; 2026 PixelPitchPartners. Minden jog fenntartva.</p>
           </div>
 

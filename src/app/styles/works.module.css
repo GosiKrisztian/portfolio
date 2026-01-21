@@ -149,23 +149,25 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  z-index: 99999;
+  z-index: 999999;
   backdrop-filter: blur(8px);
-  padding: 100px 20px 60px 20px;
+  padding: 120px 20px 60px 20px;
   overflow-y: auto;
 }
 
 .modalContent {
-  background: rgba(10, 15, 30, 0.98);
-  border: 1px solid rgba(100, 200, 255, 0.4);
-  border-radius: 15px;
+  background: rgba(20, 25, 50, 0.95);
+  border: 1px solid rgba(100, 200, 255, 0.3);
+  border-radius: 10px;
   padding: 45px 30px 30px 30px;
   max-width: 800px;
   width: 100%;
   position: relative;
   height: auto;
+  max-height: 75vh;
   margin-top: auto; /* Ezek segítenek, hogy ha kicsi a tartalom, */
   margin-bottom: 20px;
+  overflow-y: auto;
   box-shadow: 0 0 50px rgba(0, 0, 0, 1), 0 0 20px rgba(100, 200, 255, 0.2);
 }
 
@@ -255,4 +257,14 @@
 .navButtonLeft:hover, .navButtonRight:hover {
   background: rgba(100, 200, 255, 0.3);
   color: white;
+}
+
+/* Opcionális: Szebb görgetősáv a modalon belül */
+.modalContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: rgba(100, 200, 255, 0.3);
+  border-radius: 10px;
 }
