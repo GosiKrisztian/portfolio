@@ -263,6 +263,7 @@ const handleOpenModal = (work) => {
                   alt={work.title} 
                   width={400} 
                   height={200}
+                  style={{ width: '100%', height: 'auto' }}
                 />
                 <h3>{work.title}</h3>
                 <p>{work.shortDesc}</p>
@@ -292,6 +293,7 @@ const handleOpenModal = (work) => {
                     className={worksStyles.modalImage} 
                     width={800} 
                     height={450}
+                    style={{ height: 'auto' }}
                   />
                 </div>
 
@@ -320,6 +322,7 @@ const handleOpenModal = (work) => {
                     className={partnersStyles.partnerLogo} 
                     width={220} 
                     height={140}
+                    style={{ height: 'auto' }}
                   />
                 </div>
                 <h3 className={partnersStyles.partnerName}>{partner.name}</h3>
@@ -344,6 +347,7 @@ const handleOpenModal = (work) => {
                       className={partnersStyles.modalLogoImage} 
                       width={300} 
                       height={150}
+                      style={{ height: 'auto' }}
                     />
                   </div>
                 )}
@@ -393,6 +397,7 @@ const handleOpenModal = (work) => {
                 className={footerStyles.footerLogoImage} 
                 width={100}
                 height={100}
+                style={{ height: 'auto' }}
               />
               <h3 className={footerStyles.footerLogo}>PixelPitchPartners</h3>
             </div>
